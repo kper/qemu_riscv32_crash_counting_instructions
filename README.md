@@ -10,3 +10,5 @@ I get the following crash:
 0.275 Bail out! ERROR:../tests/tcg/plugins/insn.c:97:vcpu_init: assertion failed: (count > 0)
 0.433 Aborted (core dumped)
 ```
+
+The easiest way to get the error is to run `docker build -t qemu_issue`.
