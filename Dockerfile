@@ -25,6 +25,6 @@ RUN mkdir /opt/qemu/plugins && cp -r /qemu/build/tests/tcg/plugins /opt/qemu/plu
 COPY init.S /work/init.S
 COPY link.ld /work/link.ld
 COPY main.c /work/main.c
-RUN /opt/riscv/bin/riscv64-unknown-elf-gcc -S -c -march=rv32im -mabi=ilp32 /work/main.c -o /work/main.s \
-	&& /opt/riscv/bin/riscv64-unknown-elf-gcc -march=rv32im -mabi=ilp32 -static -nostartfiles -T/work/link.ld  /work/main.s /work/init.S -o /work/main \
-	&& /opt/qemu/bin/qemu-system-riscv32 -plugin /opt/qemu/plugins/plugins/libinsn.so -L /opt/riscv/riscv64-unknown-elf -nographic -machine spike -bios /work/main
+RUN /opt/riscv/bin/riscv64-unknown-elf-gcc -S -c -march=rv32im -mabi=ilp32 /work/main.c -o /work/main.s
+RUN /opt/riscv/bin/riscv64-unknown-elf-gcc -march=rv32im -mabi=ilp32 -static -nostartfiles -T/work/link.ld  /work/main.s /work/init.S -o /work/main 
+RUN /opt/qemu/bin/qemu-system-riscv32 -plugin /opt/qemu/plugins/plugins/libinsn.so -L /opt/riscv/riscv64-unknown-elf -nographic -machine spike -bios /work/main
